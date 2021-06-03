@@ -1,0 +1,35 @@
+'timescale 1ns/1ps
+
+//Main logic module///
+
+module and1(input a,b,
+            output y);
+           
+assign y = a & b;
+
+endmodule
+
+
+//Testbench Logic///
+module tb();
+reg a,b;
+wire y;
+
+and1 dut(a,b,y);
+
+initial begin
+a=0;
+b=0;
+#10
+a=0;
+b=1;
+#10
+a=1;
+b=0;
+#10
+a=1;
+b=1;
+#10
+$finish;
+end
+endmodule
