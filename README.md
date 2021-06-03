@@ -1,1 +1,1 @@
-Verilog Code learnings which help for FPGA RTL design enthusiasts 
+Verilog Code My-Learnings which may helps for FPGA RTL design enthusiasts 
