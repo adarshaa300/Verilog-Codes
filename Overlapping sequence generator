@@ -59,7 +59,7 @@ endmodule
 
 //Testbench//
 module tb();
-reg din, clk=0, rst=0;
+reg din, clk=0, rst=1;
 wire dout;
 
 OSG dur(rst, clk, din, dout);
@@ -67,7 +67,6 @@ OSG dur(rst, clk, din, dout);
 always #5 clk = ~clk;
 
 initial begin
-rst = 1;
 #10
 rst = 0;
 din = 0;
