@@ -1,0 +1,100 @@
+//////////Overlapping "111" sequence detector////////
+
+//Main module//
+module OSG(input rst, clk, din,
+            output reg dout);
+
+parameter state0 = 0;
+parameter state0 = 1;
+parameter state0 = 2;
+reg [1:0] state;
+
+always@(posedge clk or posedge rst) begin
+  if(rst)begin
+   state <= state0;
+   dout <= 1'b0;
+   end
+  else begin
+   case(state)
+
+    state0:begin
+      if(din == 1'b1) begin
+        state <= state1
+        dout <= 1'b0;
+      end
+      else begin
+        state <= state0;
+        dout <= 0;
+      end
+    end
+  
+    state1: begin
+      if(din == 1'b1) begin
+        state <= state2
+        dout <= 1'b0;
+      end
+      else begin
+        state <= state0;
+        dout <= 0;
+      end
+    end
+    
+    state2: begin
+     if(din == 1'b1) begin
+       state <= state0
+       dout <= 1'b1;
+     end
+     else begin
+       state <= state0;
+       dout <= 0;
+     end
+    end
+    
+    default: state <= state0;
+    
+    endcase
+   end
+  end
+endmodule
+
+//Testbench//
+module tb();
+reg din, clk=0, rst=0;
+wire dout;
+
+OSG dur(rst, clk, din, dout);
+
+always #5 clk = ~clk;
+
+initial begin
+rst = 1;
+#10
+rst = 0;
+din = 0;
+#10
+din = 1;
+#10
+din = 1;
+#10
+din = 1;
+#10
+din = 0;
+#10
+din = 1;
+#10
+din = 1;
+#10
+din = 1;
+#10
+din = 1;
+#10
+din = 0;
+#10
+din = 0;
+#200
+$finish;
+end
+endmodule
+
+
+    
