@@ -1,0 +1,25 @@
+// Main module//
+module and1(input a,b;
+            output y);
+assign y = a and b;
+endmodule
+
+//Testbench//
+module tb();
+reg a = 0, b = 0;
+wire y;
+
+and1 dut (a,b,y);
+
+always #20 a = ~a;
+always #10 b = ~b;
+
+//Generating VCD file//
+initial begin
+$dumpfile("user_created.vcd");
+$dumpvars;
+#200
+$finish;
+end
+
+endmodule
