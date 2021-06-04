@@ -1,0 +1,56 @@
+/////////////////////Code for Traffic Light Controller (TLC)///////////////
+
+///Main Module///
+module TLC(input clk, rst, 
+            output reg r,y,g);
+                      
+parameter start = 0;
+parameter red = 1;
+parameter yellow = 2;
+parameter green = 3;
+reg [1:0] state;
+
+initial begin
+state <= start;
+end
+
+always@(posedge clk or posedge rst) begin
+if (rst)
+state <= start;
+else begin
+case (state)
+
+start: begin
+state = red;
+r = 0;
+y = 0;
+g = 0;
+end
+
+red: begin
+state = yellow;
+r=1;
+y=0;
+g=0;
+end
+
+yellow: begin
+state = green;
+r=0;
+y=1;
+g=0;
+end
+
+green: begin
+state = start;
+r=0;
+y=0;
+g=1;
+end
+
+default: state = start;
+
+endcase
+end
+end
+endmodule
